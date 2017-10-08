@@ -4,7 +4,6 @@ public class Contract {
 	private long customerId;
 	private String customerName;
 	private long contractId;
-	@SuppressWarnings("unused")
 	private String status;
 
 	public Contract(long customerId, String customerName, long contractId) {
