@@ -5,6 +5,11 @@ public class Contract {
 	private String customerName;
 	private long contractId;
 	private String status;
+	
+	@SuppressWarnings("unused")
+	private Contract() {
+		
+	}
 
 	public Contract(long customerId, String customerName, long contractId) {
 		this.customerId = customerId;

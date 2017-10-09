@@ -3,6 +3,7 @@ package customer.service;
 import customer.service.aggregator.ContractAggregator;
 import customer.service.client.CustomerClient;
 import customer.service.client.StatusClient;
+import customer.service.health.ContractHealthCheck;
 import customer.service.resources.ContractResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -21,7 +22,7 @@ public class CustomerApplication extends Application<CustomerConfiguration> {
 
 	@Override
 	public void initialize(final Bootstrap<CustomerConfiguration> bootstrap) {
-		// TODO: application initialization
+
 	}
 
 	@Override
@@ -30,6 +31,8 @@ public class CustomerApplication extends Application<CustomerConfiguration> {
 				new CustomerClient(config.customerServiceHost(), config.customerServicePort()),
 				new StatusClient(config.statusServiceHost(), config.statusServicePort()));
 		final ContractResource resource = new ContractResource(service);
+		final ContractHealthCheck healthCheck = new ContractHealthCheck();
+		environment.healthChecks().register("", healthCheck);
 		environment.jersey().register(resource);
 	}
 
